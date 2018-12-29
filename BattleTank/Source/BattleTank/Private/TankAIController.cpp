@@ -6,17 +6,16 @@
 void ATankAIController::BeginPlay()
 {
 	Super::BeginPlay();
-	UE_LOG(LogTemp, Warning, TEXT("TankPlayerController begin play"));
 
 	/// Log out possessed tank
 	ATank* PossessedTank = GetControlledTank();
 	if (!PossessedTank)
 	{
-		UE_LOG(LogTemp, Error, TEXT("No Possessed Tank"));
+		UE_LOG(LogTemp, Error, TEXT("No AI Possessed Tank"));
 	}
 	else
 	{
-		UE_LOG(LogTemp, Warning, TEXT("Possessed Tank %s"), *PossessedTank->GetFName().ToString());
+		UE_LOG(LogTemp, Warning, TEXT("AI Possessed Tank %s"), *PossessedTank->GetFName().ToString());
 	}
 }
 
