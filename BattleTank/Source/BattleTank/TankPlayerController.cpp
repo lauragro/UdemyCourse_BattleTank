@@ -1,6 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "TankPlayerController.h"
+#include "Engine/World.h"
 
 void ATankPlayerController::BeginPlay()
 {
@@ -57,10 +58,13 @@ bool ATankPlayerController::GetSightRayHitLocation(FVector& OutHitLocation) cons
 	FVector LookDirection;
 	if (GetLookDirection(ScreenLocation, LookDirection))
 	{
-		UE_LOG(LogTemp, Warning, TEXT("Look Direction: %s"), *LookDirection.ToString());
+		/// ray-trace along the look direction andd see what we hits
+		FVector HitLocation;
+		GetLookVectorHitLocation(LookDirection, HitLocation);
+		UE_LOG(LogTemp, Warning, TEXT("Look Location: %s"), *HitLocation.ToString());
 	}
 
-	// ray-trace along the look direction andd see what we hit
+	
 
 	OutHitLocation = FVector(1.0);
 
@@ -75,4 +79,21 @@ bool ATankPlayerController::GetLookDirection(FVector2D ScreenLocation, FVector& 
 		ScreenLocation.Y, 
 		CameraWorldLocation, 
 		OutLookDirection);
+}
+
+bool ATankPlayerController::GetLookVectorHitLocation(FVector LookDirection, FVector& OutHitLocation) const
+{
+	FHitResult HitResult;
+	FVector StartLocation = PlayerCameraManager->GetCameraLocation();
+	FVector EndLocation = StartLocation + LineTraceRange * LookDirection;
+	if (GetWorld()->LineTraceSingleByChannel(HitResult, StartLocation, EndLocation, ECC_Visibility))
+	{
+		OutHitLocation = HitResult.Location;
+		return true;
+	}
+	else
+	{
+		OutHitLocation = FVector(0.0);
+		return false;
+	}
 }

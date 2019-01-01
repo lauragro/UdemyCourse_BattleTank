@@ -22,6 +22,9 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	float CrosshairYLocation = 0.33333;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	float LineTraceRange = 1000000.0; // cm
+
 
 	ATank* GetControlledTank() const;
 	
@@ -39,4 +42,5 @@ private:
 	// Return an OUT parameter, TRUE if hit landscape
 	bool GetSightRayHitLocation(FVector& OutHitLocation) const;
 	bool GetLookDirection(FVector2D ScreenLocation, FVector& OutLookDirection) const;
+	bool GetLookVectorHitLocation(FVector LookDirection, FVector& OutHitLocation) const;
 };
