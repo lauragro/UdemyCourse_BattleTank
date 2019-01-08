@@ -28,6 +28,11 @@ void ATankAIController::Tick(float DeltaTime)
 	{
 		// TODO move towards player
 
+		// get vector to move straight toward player
+		// if no obstacles between here and next move location
+		// then move
+		// otherwise move away from obstacle
+
 		// aim towards player
 		GetControlledTank()->AimAt(GetPlayerTank()->GetActorLocation());
 
