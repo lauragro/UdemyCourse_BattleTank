@@ -29,17 +29,14 @@ protected:
 	UTankAimingComponent* TankAimingComponent = nullptr;
 
 public:	
-	// Called every frame
-	virtual void Tick(float DeltaTime) override;
-
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
 	void AimAt(FVector HitLocation);
 
 private:
-	// Starting value for launch is 1000 m/s
+	// Starting value for launch is 50 m/s
 	UPROPERTY(EditAnywhere, Category = Firing)
-	float LaunchSpeed = 100000.0;
+	float LaunchSpeed = 5000.0f;
 	
 };
