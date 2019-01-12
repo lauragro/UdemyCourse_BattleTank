@@ -68,9 +68,6 @@ void UTankAimingComponent::MoveBarrelTowards(FVector AimDirection)
 	auto AimAsRotation = AimDirection.Rotation();
 	auto DeltaRotation = AimAsRotation - BarrelRotation;
 
-
-	// Move barrel the right amount this frame
-	// given max elevation speed and time frame
-	Barrel->Elevate(5.0f);// TODO remove magic number
+	Barrel->Elevate(DeltaRotation.Pitch);
 }
 
