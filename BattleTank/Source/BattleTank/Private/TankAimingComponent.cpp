@@ -4,7 +4,7 @@
 #include "TankAimingComponent.h"
 #include "Components/StaticMeshComponent.h"
 #include "Classes/Kismet/GameplayStatics.h"
-
+#include "TankBarrel.h"
 
 // Sets default values for this component's properties
 UTankAimingComponent::UTankAimingComponent()
@@ -17,7 +17,7 @@ UTankAimingComponent::UTankAimingComponent()
 }
 
 
-void UTankAimingComponent::SetBarrelReference(UStaticMeshComponent * BarrelToSet)
+void UTankAimingComponent::SetBarrelReference(UTankBarrel * BarrelToSet)
 {
 	Barrel = BarrelToSet;
 }
@@ -63,5 +63,6 @@ void UTankAimingComponent::MoveBarrelTowards(FVector AimDirection)
 
 	// Move barrel the right amount this frame
 	// given max elevation speed and time frame
+	Barrel->Elevate(5.0f);// TODO remove magic number
 }
 
