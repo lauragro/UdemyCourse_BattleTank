@@ -38,6 +38,9 @@ public:
 
 	void AimAt(FVector HitLocation);
 
+	UFUNCTION(BlueprintCallable, Category = Firing)
+	void Fire();
+
 private:
 	// Starting value for launch is 50 m/s
 	UPROPERTY(EditAnywhere, Category = Firing)
